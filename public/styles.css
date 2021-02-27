@@ -49,15 +49,6 @@ body {
   75% {
     transform: scale(4);
   }
-  /* 75% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  } */
-  /* 90% {
-    transform: scale(0.75);
-  } */
   100% {
     transform: scale(0);
   }

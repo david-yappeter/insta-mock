@@ -123,9 +123,9 @@ const MainPost = () => {
         </IconButton>
         <IconButton style={{ marginLeft: "auto" }} onClick={handleBookmark}>
           {isBookmark ? (
-            <BookmarkBorderIcon />
-          ) : (
             <BookmarkIcon style={{ color: "black" }} />
+          ) : (
+            <BookmarkBorderIcon />
           )}
         </IconButton>
       </CardActions>

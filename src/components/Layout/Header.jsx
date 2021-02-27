@@ -1,6 +1,6 @@
 import React from "react";
 
-import UserAvatar from "./components/UserAvatar";
+import { ChatBubble, UserAvatar } from "./components/index";
 
 import { fade, makeStyles } from "@material-ui/styles";
 import {
@@ -8,6 +8,7 @@ import {
   Container,
   InputBase,
   Toolbar,
+  Link,
   Typography,
 } from "@material-ui/core";
 
@@ -22,7 +23,13 @@ const useStyles = makeStyles((theme) => ({
   },
   avatarEnd: {
     transform: "scale(0.9)",
-    marginLeft: "auto",
+    // marginLeft: "auto",
+  },
+  chatIconEnd: {
+    // marginLeft: "auto",
+  },
+  chatIconSize: {
+    height: "30px",
   },
 }));
 
@@ -32,8 +39,20 @@ const Header = () => {
     <AppBar className={classes.navigationBar} position="fixed">
       <Container>
         <Toolbar variant="dense">
-          <img src={instagram} style={{ height: "60px" }}></img>
-          <UserAvatar classes={classes} />
+          <Link href="/">
+            <img src={instagram} style={{ height: "60px" }}></img>
+          </Link>
+          <div
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              width: "100px",
+            }}>
+            <ChatBubble classes={classes} />
+            <UserAvatar classes={classes} />
+          </div>
         </Toolbar>
       </Container>
     </AppBar>

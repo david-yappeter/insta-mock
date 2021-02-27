@@ -12,7 +12,11 @@ import {
 
 const useStyles = makeStyles(() => ({
   popUpList: {
-    minWidth: "500px",
+    minWidth: "350px",
+    borderRadius: "50%",
+  },
+  centerText: {
+    textAlign: "center",
   },
 }));
 
@@ -23,8 +27,8 @@ const MoreDialog = (props) => {
   return (
     <Dialog onClose={onClose} open={open}>
       <List className={classes.popUpList}>
-        <ListItem>
-          <ListItemText style={{ textAlign: "center" }} primary="tester" />
+        <ListItem button>
+          <ListItemText className={classes.centerText} primary="tester" />
         </ListItem>
       </List>
     </Dialog>
