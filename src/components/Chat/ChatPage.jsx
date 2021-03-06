@@ -63,7 +63,7 @@ const ChatPage = () => {
 
   return (
     <Fragment>
-      <Grid container>
+      {/* <Grid container>
         <Grid item xs={4}>
           <Paper className={classes.leftPanel}>
             <List>
@@ -110,14 +110,14 @@ const ChatPage = () => {
                 </Typography>
               </Toolbar>
             </AppBar>
-            <ChatPanel />
             <Typography>abc</Typography>
             <Typography>abc</Typography>
             <Typography>abc</Typography>
             <Typography>abc</Typography>
           </Paper>
         </Grid>
-      </Grid>
+      </Grid> */}
+      <ChatPanel />
     </Fragment>
   );
 };

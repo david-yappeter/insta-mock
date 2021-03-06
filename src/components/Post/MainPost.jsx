@@ -137,7 +137,12 @@ const MainPost = () => {
             ellipsis={
               <span>
                 ...
-                <Link onClick={handleExpandClick}> Show More</Link>
+                <Link
+                  onClick={handleExpandClick}
+                  style={{ position: "absolute" }}>
+                  {" "}
+                  Show More
+                </Link>
               </span>
             }>
             This impressive paella is a perfect party dish and a fun meal to
@@ -153,7 +158,11 @@ const MainPost = () => {
             {expanded && (
               <span>
                 {" "}
-                <Link onClick={handleExpandClick}>Show Less</Link>
+                <Link
+                  onClick={handleExpandClick}
+                  style={{ position: "absolute" }}>
+                  Show Less
+                </Link>
               </span>
             )}
           </Truncate>
