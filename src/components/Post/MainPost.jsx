@@ -51,7 +51,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MainPost = () => {
+const MainPost = (props) => {
+  const { caption, files, created_at, user } = props;
+
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -93,15 +95,14 @@ const MainPost = () => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={user.name}
         subheader="September 14, 2016"
       />
       <MoreDialog open={moreDialogOpen} onClose={handleMoreDialogOnClose} />
       <CardMedia
-        // style={{ position: "relative" }}
         onDoubleClick={handleLiked}
         className={classes.media}
-        image={dummyImage}
+        image={files[0].view_link}
         title="Paella dish">
         <FavoriteIcon
           style={{ transform: "scale(0)" }}
@@ -145,16 +146,7 @@ const MainPost = () => {
                 </Link>
               </span>
             }>
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like. Heat oil in a (14- to 16-inch) paella pan
-            or a large, deep skillet over medium-high heat. Add chicken, shrimp
-            and chorizo, and cook, stirring occasionally until lightly browned,
-            6 to 8 minutes. Transfer shrimp to a large plate and set aside,
-            leaving chicken and chorizo in the pan. Add pimentón, bay leaves,
-            garlic, tomatoes, onion, salt and pepper, and cook, stirring often
-            until thickened and fragrant, about 10 minutes. Add saffron broth
-            and remaining 4 1/2 cups chicken broth; bring to a boil.
+            {caption}
             {expanded && (
               <span>
                 {" "}

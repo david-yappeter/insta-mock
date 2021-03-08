@@ -1,3 +1,3 @@
-import MainPost from "./MainPost";
+import PostPage from "./PostPage";
 
-export { MainPost };
+export { PostPage };
