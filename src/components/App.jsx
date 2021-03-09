@@ -10,10 +10,12 @@ import { Route } from "react-router-dom";
 import { Header } from "./Layout/index";
 import { PostPage } from "./Post/index";
 import { ChatPage } from "./Chat/index";
+import LoginPage  from "./Login/LoginPage";
 
 import { Container } from "@material-ui/core";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   const cache = new InMemoryCache();
@@ -35,7 +37,7 @@ function App() {
   });
 
   return (
-    <Fragment>
+    <CookiesProvider>
       <ApolloProvider client={client}>
         <Header />
         <Container fixed>
@@ -50,11 +52,10 @@ function App() {
               marginTop: "64px",
             }}>
             <Route exact path="/">
+                <LoginPage />
+            </Route>
+            <Route exact path="/post">
               <PostPage />
-              {/* <MainPost />
-              <MainPost />
-              <MainPost />
-              <MainPost /> */}
             </Route>
             <Route path="/chat">
               <ChatPage />
@@ -62,7 +63,7 @@ function App() {
           </div>
         </Container>
       </ApolloProvider>
-    </Fragment>
+    </CookiesProvider>
   );
 }
 
