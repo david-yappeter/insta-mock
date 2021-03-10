@@ -9,27 +9,29 @@ import ChatList from "./components/ChatList/ChatList";
 import LoginForm from "./components/ChatFeed/LoginForm";
 import ChatCard from "./components/ChatCard/ChatCard";
 
+import { useCookies } from "react-cookie";
+
 const useStyles = () => {};
 
 const ChatPanel = () => {
+  const [cookies, setCookies] = useCookies();
   const classes = useStyles();
   return (
     <Fragment>
       {/* <ChatBubble messages={chat} onNewMessage={handleAddChat} /> */}
 
       <ChatEngine
-        // projectID={process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID}
-        projectID={"94b2e0fd-b726-4b6b-aa82-07aee5c32e3d"}
+        projectID={process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID}
         height="100vh"
         // userName={localStorage.getItem("username")}
         // userSecret={localStorage.getItem("password")}
-        userName="david"
-        userSecret="123123"
+        userName={cookies.email}
+        userSecret={cookies.password}
         // renderChatCard={(chat, index) => {
         //   console.log(chat, index);
         //   return <ChatCard chat={chat} index={index} />;
         // }}
-        renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
+        // renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
         // renderChatList={(chatAppProps) => {
         //   return <ChatList {...chatAppProps} />;
         // }}

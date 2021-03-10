@@ -8,8 +8,9 @@ import particleConfig from "./particlesConfig";
 import { Route } from "react-router-dom";
 
 import { Header } from "./Layout/index";
-import { PostPage } from "./Post/index";
-import { ChatPage } from "./Chat/index";
+import RootPath from "./Path/Root";
+import PostPath from "./Path/Post";
+import ChatPath from "./Path/Chat";
 
 import { Container } from "@material-ui/core";
 
@@ -17,7 +18,6 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 function App() {
   const cache = new InMemoryCache();
-
   const client = new ApolloClient({
     // Provide required constructor fields
     cache: cache,
@@ -37,30 +37,21 @@ function App() {
   return (
     <Fragment>
       <ApolloProvider client={client}>
-        <Header />
-        <Container fixed>
-          <div
-            style={{
-              position: "fixed",
-            }}>
-            <Particles width="100vw" heigth="100vh" params={particleConfig} />
-          </div>
-          <div
-            style={{
-              marginTop: "64px",
-            }}>
-            <Route exact path="/">
-              <PostPage />
-              {/* <MainPost />
-              <MainPost />
-              <MainPost />
-              <MainPost /> */}
-            </Route>
-            <Route path="/chat">
-              <ChatPage />
-            </Route>
-          </div>
-        </Container>
+        <div
+          style={{
+            position: "fixed",
+          }}>
+          <Particles width="100vw" heigth="100vh" params={particleConfig} />
+        </div>
+        <Route exact path="/">
+          <RootPath />
+        </Route>
+        <Route exact path="/post">
+          <PostPath />
+        </Route>
+        <Route exact path="/chat">
+          <ChatPath />
+        </Route>
       </ApolloProvider>
     </Fragment>
   );

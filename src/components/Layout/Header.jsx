@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { ChatBubble, UserAvatar } from "./components/index";
 
@@ -10,7 +10,13 @@ import {
   Toolbar,
   Link,
   Typography,
+  Menu,
+  MenuItem,
+  IconButton,
 } from "@material-ui/core";
+
+import { useCookies } from "react-cookie";
+import { Redirect } from "react-router-dom";
 
 import instagram from "./instagram.png";
 
@@ -34,7 +40,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
+  const [cookies, setCookies, removeCookies] = useCookies();
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const classes = useStyles();
+
+  const handleOpen = (e) => {
+    setAnchorEl(e.target);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    handleClose();
+    removeCookies("access_token");
+    removeCookies("email");
+    removeCookies("password");
+  };
+
   return (
     <AppBar className={classes.navigationBar} position="fixed">
       <Container>
@@ -51,7 +75,25 @@ const Header = () => {
               width: "100px",
             }}>
             <ChatBubble classes={classes} />
-            <UserAvatar classes={classes} />
+            <IconButton onClick={handleOpen}>
+              <UserAvatar classes={classes} />
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}>
+              <Link href="/" style={{ color: "black" }}>
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+              </Link>
+              <Link href="/" style={{ color: "black" }}>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Link>
+              <Link onClick={handleLogout} href="/" style={{ color: "black" }}>
+                <MenuItem>Logout</MenuItem>
+              </Link>
+            </Menu>
           </div>
         </Toolbar>
       </Container>

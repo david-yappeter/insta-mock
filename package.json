@@ -1,5 +1,6 @@
 {
   "name": "my-web",
+  "homepage": "http://davidyappeter.xyz/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,6 +19,7 @@
     "react-chat-bubble": "^0.8.7",
     "react-chat-bubble-date": "^0.2.8",
     "react-chat-engine": "^1.6.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^17.0.1",
     "react-material-ui-carousel": "^2.2.0",
     "react-particles-js": "^3.4.1",
