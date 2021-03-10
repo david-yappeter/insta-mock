@@ -15,6 +15,7 @@ import ChatPath from "./Path/Chat";
 import { Container } from "@material-ui/core";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   const cache = new InMemoryCache();
@@ -35,7 +36,7 @@ function App() {
   });
 
   return (
-    <Fragment>
+    <CookiesProvider>
       <ApolloProvider client={client}>
         <div
           style={{
@@ -53,7 +54,7 @@ function App() {
           <ChatPath />
         </Route>
       </ApolloProvider>
-    </Fragment>
+    </CookiesProvider>
   );
 }
 
