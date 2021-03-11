@@ -16,13 +16,26 @@ import { Container } from "@material-ui/core";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { CookiesProvider } from "react-cookie";
+import { createUploadLink } from "apollo-upload-client";
+import { useCookies } from "react-cookie";
+import { setContext } from "@apollo/client/link/context";
 
 function App() {
+  const [cookies] = useCookies();
+  const authLink = setContext((_, { headers }) => {
+    const token = cookies.access_token;
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    };
+  });
   const cache = new InMemoryCache();
   const client = new ApolloClient({
     // Provide required constructor fields
     cache: cache,
-    uri: "http://david-user-go.herokuapp.com/query",
+    // uri: "http://david-user-go.herokuapp.com/query",
 
     // Provide some optional constructor fields
     name: "react-web-client",
@@ -33,6 +46,12 @@ function App() {
         fetchPolicy: "cache-and-network",
       },
     },
+    link: authLink.concat(
+      createUploadLink({
+        uri: "http://david-user-go.herokuapp.com/query",
+        // uri: "http://localhost:8080/query",
+      })
+    ),
   });
 
   return (
@@ -41,7 +60,8 @@ function App() {
         <div
           style={{
             position: "fixed",
-          }}>
+          }}
+        >
           <Particles width="100vw" heigth="100vh" params={particleConfig} />
         </div>
         <Route exact path="/">

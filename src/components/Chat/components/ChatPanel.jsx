@@ -21,7 +21,8 @@ const ChatPanel = () => {
       {/* <ChatBubble messages={chat} onNewMessage={handleAddChat} /> */}
 
       <ChatEngine
-        projectID={process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID}
+        // projectID={process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID}
+        projectID="78467b2d-96ee-4aa0-9070-4bb12c5dba43"
         height="100vh"
         // userName={localStorage.getItem("username")}
         // userSecret={localStorage.getItem("password")}

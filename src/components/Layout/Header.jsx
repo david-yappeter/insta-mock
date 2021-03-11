@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { ChatBubble, UserAvatar } from "./components/index";
+import { ChatBubble, UserAvatar, PostCreate } from "./components/index";
 
 import { fade, makeStyles } from "@material-ui/styles";
 import {
@@ -72,8 +72,10 @@ const Header = () => {
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
-              width: "100px",
-            }}>
+              width: "170px",
+            }}
+          >
+            <PostCreate />
             <ChatBubble classes={classes} />
             <IconButton onClick={handleOpen}>
               <UserAvatar classes={classes} />
@@ -83,7 +85,8 @@ const Header = () => {
               anchorEl={anchorEl}
               keepMounted
               open={Boolean(anchorEl)}
-              onClose={handleClose}>
+              onClose={handleClose}
+            >
               <Link href="/" style={{ color: "black" }}>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
               </Link>

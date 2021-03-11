@@ -1,17 +1,26 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Backdrop,
+  CircularProgress,
+  Snackbar,
+} from "@material-ui/core";
+
+import MuiAlert from "@material-ui/lab/Alert";
+
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 
 import { GET_TOKEN } from "../Graphql/mutation";
 import { useMutation } from "@apollo/client";
@@ -32,7 +41,17 @@ function Copyright() {
   );
 }
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
   paper: {
     paddingTop: theme.spacing(22),
     display: "flex",
@@ -50,10 +69,16 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
 }));
 
 const LoginPage = () => {
   const [cookies, setCookies, removeCookies] = useCookies();
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [error, setError] = useState("");
 
   const classes = useStyles();
   const [login, setLogin] = useState({
@@ -61,12 +86,15 @@ const LoginPage = () => {
     password: "",
   });
 
-  const [getToken, temptemp] = useMutation(GET_TOKEN, {
+  const [getToken, { called, loading }] = useMutation(GET_TOKEN, {
     update(cache, result) {
-      console.log(result);
       setCookies("access_token", result.data.token.login.token, {});
       setCookies("email", login.email);
       setCookies("password", login.password);
+    },
+    onError(err) {
+      setAlertOpen(true);
+      setError(err.message);
     },
   });
 
@@ -93,9 +121,31 @@ const LoginPage = () => {
     });
   };
 
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+      {called && loading && (
+        <Backdrop className={classes.backdrop} open={true}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={6000}
+        onClose={handleAlertClose}
+      >
+        <Alert onClose={handleAlertClose} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -137,7 +187,9 @@ const LoginPage = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}
+            disable={called && loading ? "true" : "false"}
+          >
             Sign In
           </Button>
         </form>

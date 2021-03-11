@@ -25,6 +25,9 @@ import {
   ListItemSecondaryAction,
 } from "@material-ui/core";
 
+import {useCookies} from "react-cookie";
+import {Redirect} from "react-router-dom";
+
 const StyledBadge = withStyles((theme) => ({
   badge: {
     backgroundColor: "#44b700",
@@ -58,8 +61,13 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ChatPage = () => {
+    const [cookies] = useCookies();
   const classes = useStyles();
   const [online, setOnline] = useState(false);
+
+  if (!cookies.access_token) {
+      return <Redirect to="/" />
+  }
 
   return (
     <Fragment>
