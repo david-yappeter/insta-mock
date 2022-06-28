@@ -11,6 +11,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  @apply bg-custom-white-lightest min-h-screen;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -25,6 +29,10 @@ code {
 /* Global - Start */
 #_inner-root {
   @apply relative;
+}
+
+._loader {
+  @apply animate-spin rounded-full bg-transparent border-custom-gray-border;
 }
 
 ._avatar {

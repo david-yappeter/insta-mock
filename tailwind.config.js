@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         custom: {
+          "white-lightest": "rgb(250,250,250)",
           gray: "#EFEFEF",
           "gray-font": "#6F6F6F",
           "gray-light-font": "rgb(142, 142, 142)",

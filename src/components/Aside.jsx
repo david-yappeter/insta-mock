@@ -68,7 +68,7 @@ const Aside = () => {
             <p>{item.username}</p>
             <p>{item.subtitle}</p>
           </div>
-          <p className="_aside-button text-custom-blue">Switch</p>
+          <p className="_aside-button text-custom-blue">Follow</p>
         </div>
       ))}
     </div>
