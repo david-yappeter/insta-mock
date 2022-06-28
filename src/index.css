@@ -1,13 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* Utilities - Start */
+.absolute-center {
+  @apply absolute top-50% left-50% -translate-x-1/2 -translate-y-1/2;
+}
+/* Utilities - End */
+
+/* Global - Start */
+#_inner-root {
+  @apply relative;
+}
+
+._avatar {
+  @apply rounded-full;
+}
+
+._avatar {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* Global - End */
+
+/* Navbar - Start */
+._navbar-container {
+  @apply sticky top-0px bg-white w-full py-12px border-b-1px border-custom-gray-border;
+}
+
+._navbar-inner-container {
+  @apply relative container mx-auto flex justify-between items-center;
+}
+
+._navbar-logo {
+  background-image: url(https://static.cdninstagram.com/rsrc.php/v3/y-/r/ZhQcTOjgQ3f.png);
+  background-position: 0 -298px;
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 103px;
+  height: 29px;
+}
+
+._navbar-toolbar {
+  @apply flex items-center;
+}
+
+._navbar-toolbar > :not(:last-child) {
+  @apply mr-20px;
+}
+
+._navbar-search {
+  @apply w-25% flex flex-row-reverse justify-end items-center rounded-5px bg-custom-gray px-20px py-8px;
+}
+
+._navbar-search > input {
+  @apply text-custom-gray-font bg-custom-gray focus:outline-0;
+}
+
+._navbar-search > input + div {
+  @apply mr-12px;
+}
+
+._navbar-search > input:focus + div {
+  @apply hidden;
+}
+/* Navbar - End */
+
+/* Home - Start */
+#_home-section {
+  @apply container mx-auto px-20px flex;
+}
+
+#_post-container {
+  @apply grow basis-60% lg:m-20px mr-20px lg:mr-10px;
+}
+
+#_aside-container {
+  @apply hidden lg:block grow basis-40% m-20px ml-10px;
+}
+
+._aside-main-contact {
+  @apply flex w-full items-center my-12px;
+}
+
+._aside-contact-detail {
+  @apply flex flex-col items-start justify-center;
+}
+
+._aside-avatar {
+  @apply mr-16px;
+}
+
+._aside-contact-detail :nth-child(1) {
+  @apply font-bold text-black text-14px;
+}
+
+._aside-contact-detail :nth-child(2) {
+  @apply text-custom-gray-font text-14px;
+}
+
+._aside-button {
+  @apply ml-auto font-bold text-12px cursor-pointer;
+}
+
+._suggestion-header-container {
+  @apply flex justify-between;
+}
+
+._suggestion-header-container :nth-child(1) {
+  @apply text-custom-gray-light-font font-bold;
+}
+
+/* Home - End */
