@@ -34,6 +34,8 @@ export const useAxios = (config) => {
       .finally(() => {
         setLoading(false);
       });
+
+    // eslint-disable-next-line
   }, []);
 
   return { data, loading, error };

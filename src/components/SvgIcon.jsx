@@ -7,6 +7,7 @@ const svgIcon = {
   EXPLORE: "explore",
   HEART: "heart",
   SEARCH: "search",
+  MORE_OPTION: "more_option",
 };
 
 const SvgIcon = ({ icon, ...rest }) => {
@@ -149,6 +150,20 @@ const SvgIcon = ({ icon, ...rest }) => {
           x2="22"
           y1="16.511"
           y2="22"></line>
+      </svg>
+    ),
+    [svgIcon.MORE_OPTION]: (
+      <svg
+        aria-label="More options"
+        color="#262626"
+        fill="#262626"
+        height="24"
+        role="img"
+        viewBox="0 0 24 24"
+        width="24">
+        <circle cx="12" cy="12" r="1.5"></circle>
+        <circle cx="6" cy="12" r="1.5"></circle>
+        <circle cx="18" cy="12" r="1.5"></circle>
       </svg>
     ),
   };

@@ -24,6 +24,15 @@ code {
 .absolute-center {
   @apply absolute top-50% left-50% -translate-x-1/2 -translate-y-1/2;
 }
+
+.username-title {
+  @apply font-bold text-14px;
+}
+
+.subtitle-title {
+  @apply text-custom-gray-font text-14px;
+}
+
 /* Utilities - End */
 
 /* Global - Start */
@@ -43,6 +52,22 @@ code {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+._card {
+  @apply border-1px border-custom-gray-border rounded-5px;
+}
+
+._card ._card-header {
+  @apply bg-white flex items-center px-12px py-8px rounded-t-5px;
+}
+
+._card ._card-image {
+  @apply w-full max-h-600px bg-black;
+}
+
+._card ._card-image img {
+  @apply mx-auto h-auto;
 }
 /* Global - End */
 
@@ -115,11 +140,11 @@ code {
 }
 
 ._aside-contact-detail :nth-child(1) {
-  @apply font-bold text-black text-14px;
+  @apply text-black username-title;
 }
 
 ._aside-contact-detail :nth-child(2) {
-  @apply text-custom-gray-font text-14px;
+  @apply subtitle-title;
 }
 
 ._aside-button {
