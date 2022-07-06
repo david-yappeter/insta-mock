@@ -159,4 +159,8 @@ code {
   @apply text-custom-gray-light-font font-bold;
 }
 
+._post-like-count {
+  @apply font-semibold;
+}
+
 /* Home - End */

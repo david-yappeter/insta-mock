@@ -42,8 +42,28 @@ const PostSection = () => {
             <div className="_card-image">
               <img src={item.content[0]} alt="" />
             </div>
-
             {/* Content */}
+            <div className="px-12px py-8px">
+              {/* Tools */}
+              <div className="flex mb-12px">
+                <SvgIcon
+                  className="cursor-pointer mr-12px"
+                  icon={svgIcon.HEART}
+                />
+                <SvgIcon
+                  className="cursor-pointer mr-12px"
+                  icon={svgIcon.COMMENT}
+                />
+                <SvgIcon className="cursor-pointer" icon={svgIcon.SHARE} />
+                <SvgIcon
+                  className="cursor-pointer ml-auto"
+                  icon={svgIcon.SAVE}
+                />
+              </div>
+              {/* Like */}
+              <p className="_post-like-count">443 likes</p>
+              <p className="_post-like-count">loberz</p>
+            </div>
           </div>
         ))}
     </div>
