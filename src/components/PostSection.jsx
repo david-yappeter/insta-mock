@@ -1,16 +1,64 @@
-import React from "react";
-import { useAxios } from "../redux/mocks/adapter";
+import moment from "moment";
+import React, { useState, useEffect } from "react";
+import { useLazyAxios } from "../redux/mocks/adapter";
+import { updateQueryStringParameter } from "../redux/util";
 import Avatar from "./Avatar";
 import Loader from "./Loader";
 import { svgIcon, SvgIcon } from "./SvgIcon";
 
 const PostSection = () => {
-  const { data, loading, error } = useAxios({
-    method: "GET",
-    url: "/api/posts",
+  const limit = 3;
+  const [page, setPage] = useState(1);
+  const [noData, setNoData] = useState(false);
+
+  const [req, { data, loading, error, called, fetchMore }] = useLazyAxios({
+    method: "get",
+    url: updateQueryStringParameter("/api/posts", {
+      page: page,
+      limit: limit,
+    }),
   });
 
-  if (loading)
+  window.onscroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      if (!noData && !loading) {
+        setPage((prev) => prev + 1);
+      }
+    }
+  };
+
+  useEffect(() => {
+    req();
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (called) {
+      fetchMore(
+        (existing, incoming) => {
+          if (incoming.posts?.length < limit) {
+            setNoData(true);
+          }
+
+          return {
+            posts: [...(existing.posts || {}), ...(incoming.posts || {})],
+          };
+        },
+        {
+          url: updateQueryStringParameter("/api/posts", {
+            page: page,
+            limit: limit,
+          }),
+        }
+      );
+    }
+    //eslint-disable-next-line
+  }, [page]);
+
+  if (!called)
     return (
       <div id="_post-container">
         <Loader className="mx-auto" />
@@ -18,14 +66,14 @@ const PostSection = () => {
     );
 
   if (error) {
-    return <div id="_post-container">Error...</div>;
+    return <div id="_post-container">Error... {JSON.stringify(error)} </div>;
   }
 
   return (
     <div id="_post-container">
       {data &&
-        data.posts.map((item, idx) => (
-          <div key={idx} className="_card">
+        data.posts.map((item) => (
+          <div key={item.id} className="_card _post-card">
             {/* Header */}
             <div className="_card-header">
               <Avatar
@@ -43,7 +91,7 @@ const PostSection = () => {
               <img src={item.content[0]} alt="" />
             </div>
             {/* Content */}
-            <div className="px-12px py-8px">
+            <div className="_post-content-container">
               {/* Tools */}
               <div className="flex mb-12px">
                 <SvgIcon
@@ -61,11 +109,38 @@ const PostSection = () => {
                 />
               </div>
               {/* Like */}
-              <p className="_post-like-count">443 likes</p>
-              <p className="_post-like-count">loberz</p>
+              <p className="_post-like-count">
+                {item.likes > 0
+                  ? `${item.likes} like${item.likes > 1 && "s"}`
+                  : " "}
+              </p>
+              <div className="mb-12px">
+                <span className="_post-like-count">{item.post_by.name}</span>{" "}
+                <span
+                  className="_post-desc"
+                  dangerouslySetInnerHTML={{ __html: item.description }}></span>
+              </div>
+
+              {item.comments.length > 0 && (
+                <p className="_post-comments">
+                  View all {item.comments.length} comment
+                  {item.comments.length > 1 && "s"}
+                </p>
+              )}
+              <p className="_post-date">{moment(item.created_at).fromNow()}</p>
+              <hr />
+              <div className="_post-comment-container">
+                <SvgIcon icon={svgIcon.EMOJI} />
+                <input
+                  className="_post-comment-input"
+                  placeholder="Add a comment..."
+                />
+                <p className="_post-comment-submit">Post</p>
+              </div>
             </div>
           </div>
         ))}
+      {loading && <Loader className="my-20px mx-auto" />}
     </div>
   );
 };

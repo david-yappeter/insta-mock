@@ -123,6 +123,10 @@ code {
   @apply grow basis-60% lg:m-20px mr-20px lg:mr-10px;
 }
 
+._post-content-container {
+  @apply px-24px py-16px sm:px-12px sm:py-8px;
+}
+
 #_aside-container {
   @apply hidden lg:block grow basis-40% m-20px ml-10px;
 }
@@ -160,7 +164,35 @@ code {
 }
 
 ._post-like-count {
-  @apply font-semibold;
+  @apply font-semibold text-14px;
+}
+
+._post-desc {
+  @apply text-14px;
+}
+
+._post-comments {
+  @apply text-12px text-custom-gray-font;
+}
+
+._post-date {
+  @apply text-10px text-custom-gray-font mb-16px;
+}
+
+._post-comment-container {
+  @apply flex justify-between items-center py-12px;
+}
+
+._post-comment-input {
+  @apply grow bg-custom-white-lightest px-12px focus:outline-0;
+}
+
+._post-comment-submit {
+  @apply text-14px text-custom-blue cursor-pointer font-semibold;
+}
+
+._post-card {
+  @apply mb-20px;
 }
 
 /* Home - End */
